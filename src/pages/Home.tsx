@@ -1,14 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
-import JobList from "../components/JobList";
+
+
+const scrollToJobs = () => {
+  window.location.href = "/jobs";
+};
 
 const Home: React.FC = () => (
   <>
-    <Navbar />
+    <Navbar scrollToJobs={scrollToJobs} />
     <main>
-      <HeroSection />
-      <JobList />
+      <HeroSection scrollToJobs={scrollToJobs} />
     </main>
   </>
 );
