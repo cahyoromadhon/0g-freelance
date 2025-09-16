@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer: React.FC = () => (
   <footer className="footer">
-    <p>© {new Date().getFullYear()} Web3 Freelance AI Platform. All rights reserved.</p>
+    <p>© {new Date().getFullYear()} Bitlance. All rights reserved.</p>
   </footer>
 );
 
