@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaEthereum, FaRobot, FaUserTie, FaUserSecret, FaClock, FaGift } from "react-icons/fa";
+import ComingSoonModal from "./ComingSoonModal";
 
 const dummyJobs = [
   {
@@ -58,35 +59,49 @@ const dummyJobs = [
   },
 ];
 
-const JobList: React.FC = () => (
-  <section id="jobs" className="job-list">
-    <h2>Latest Jobs</h2>
-    <div className="job-grid">
-      {dummyJobs.map(job => (
-        <div key={job.id} className="job-card">
-          <span className="job-badge">{job.badge}</span>
-          <span className="job-avatar">{job.avatar}</span>
-          <h3>{job.title}</h3>
-          <p>{job.description}</p>
-          <div className="job-details">
-            <div className="job-reward">
-              <FaGift className="detail-icon" />
-              <span className="reward-label">Reward:</span>
-              <span className="reward-value">{job.reward}</span>
+const JobList: React.FC = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleApplyClick = () => {
+    setModalOpen(true);
+  };
+
+  return (
+    <section id="jobs" className="job-list">
+      <h2>Latest Jobs</h2>
+      <div className="job-grid">
+        {dummyJobs.map(job => (
+          <div key={job.id} className="job-card">
+            <span className="job-badge">{job.badge}</span>
+            <span className="job-avatar">{job.avatar}</span>
+            <h3>{job.title}</h3>
+            <p>{job.description}</p>
+            <div className="job-details">
+              <div className="job-reward">
+                <FaGift className="detail-icon" />
+                <span className="reward-label">Reward:</span>
+                <span className="reward-value">{job.reward}</span>
+              </div>
+              <div className="job-status">
+                <FaClock className="detail-icon" />
+                <span className="status-label">Status:</span>
+                <span className="status-value" data-status={job.status}>{job.status}</span>
+              </div>
             </div>
-            <div className="job-status">
-              <FaClock className="detail-icon" />
-              <span className="status-label">Status:</span>
-              <span className="status-value" data-status={job.status}>{job.status}</span>
-            </div>
+            <button className="apply-btn" onClick={handleApplyClick}>
+              <FaEthereum /> Apply
+            </button>
           </div>
-          <button className="apply-btn">
-            <FaEthereum /> Apply
-          </button>
-        </div>
-      ))}
-    </div>
-  </section>
-);
+        ))}
+      </div>
+      
+      <ComingSoonModal 
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        feature="Job Application System"
+      />
+    </section>
+  );
+};
 
 export default JobList;

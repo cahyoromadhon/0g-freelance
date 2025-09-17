@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaWallet, FaBars, FaTimes } from "react-icons/fa";
-
+import ComingSoonModal from "./ComingSoonModal";
 
 interface NavbarProps {
   scrollToJobs: () => void;
@@ -8,11 +8,19 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ scrollToJobs }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalFeature, setModalFeature] = useState("");
 
   const handleMenuToggle = () => setMenuOpen((open) => !open);
   const handleNavClick = (cb?: () => void) => {
     setMenuOpen(false);
     if (cb) cb();
+  };
+
+  const showComingSoon = (feature: string) => {
+    setModalFeature(feature);
+    setModalOpen(true);
+    setMenuOpen(false);
   };
 
   return (
@@ -27,17 +35,23 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToJobs }) => {
       {menuOpen && <div className="navbar-overlay" onClick={() => setMenuOpen(false)} />}
       <nav className={`navbar-nav${menuOpen ? " open" : ""}`}>
         <a href="/" onClick={() => handleNavClick()}>Home</a>
-        <a href="#dashboard" onClick={() => handleNavClick()}>Dashboard</a>
+        <button className="nav-link" onClick={() => showComingSoon("Dashboard")}>Dashboard</button>
         <button className="nav-link" onClick={() => handleNavClick(scrollToJobs)}>Jobs</button>
-        <a href="#governance" onClick={() => handleNavClick()}>Governance</a>
-        <a href="#docs" onClick={() => handleNavClick()}>Docs</a>
+        <button className="nav-link" onClick={() => showComingSoon("Governance")}>Governance</button>
+        <button className="nav-link" onClick={() => showComingSoon("Documentation")}>Docs</button>
       </nav>
       <div className="navbar-actions">
-        <button className="wallet-btn">
+        <button className="wallet-btn" onClick={() => showComingSoon("Wallet Connection")}>
           <FaWallet size={18} style={{marginRight: 8}} />
           Connect Wallet
         </button>
       </div>
+      
+      <ComingSoonModal 
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        feature={modalFeature}
+      />
     </header>
   );
 };

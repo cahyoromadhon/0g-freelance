@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaBolt, FaLock, FaRobot, FaUsers, FaWallet, FaPlay } from "react-icons/fa";
+import ComingSoonModal from "./ComingSoonModal";
 
 interface HeroSectionProps {
   scrollToJobs: () => void;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ scrollToJobs }) => {
+  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   return (
     <section className="hero-section">
       <div className="hero-badge">
@@ -26,7 +28,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToJobs }) => {
         <span><FaUsers /> Community</span>
       </div>
       <div className="hero-actions">
-        <button className="wallet-btn-lg">
+        <button className="wallet-btn-lg" onClick={() => setIsWalletModalOpen(true)}>
           <FaWallet style={{marginRight: 12}} /> Connect Wallet
         </button>
   <button className="explore-btn" onClick={scrollToJobs}>
@@ -35,8 +37,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToJobs }) => {
         </button>
       </div>
       <div className="copyright">
-        &copy; {new Date().getFullYear()} Fugo. All rights reserved.
+        &copy; {new Date().getFullYear()} Bitlance. All rights reserved.
       </div>
+      
+      <ComingSoonModal 
+        isOpen={isWalletModalOpen}
+        onClose={() => setIsWalletModalOpen(false)}
+        feature="Wallet Connection"
+      />
     </section>
   );
 };
