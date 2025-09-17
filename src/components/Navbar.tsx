@@ -35,7 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToJobs }) => {
       {menuOpen && <div className="navbar-overlay" onClick={() => setMenuOpen(false)} />}
       <nav className={`navbar-nav${menuOpen ? " open" : ""}`}>
         <a href="/" onClick={() => handleNavClick()}>Home</a>
-        <button className="nav-link" onClick={() => showComingSoon("Dashboard")}>Dashboard</button>
+        <a href="/leaderboard" onClick={() => handleNavClick()}>Leaderboard</a>
         <button className="nav-link" onClick={() => handleNavClick(scrollToJobs)}>Jobs</button>
         <button className="nav-link" onClick={() => showComingSoon("Governance")}>Governance</button>
         <button className="nav-link" onClick={() => showComingSoon("Documentation")}>Docs</button>

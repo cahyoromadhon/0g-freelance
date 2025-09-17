@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Jobs from './pages/Jobs';
 import Profile from './pages/Profile';
+import LeaderboardPage from './pages/LeaderboardPage';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const App: React.FC = () => (
@@ -11,6 +12,7 @@ const App: React.FC = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
+        <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
